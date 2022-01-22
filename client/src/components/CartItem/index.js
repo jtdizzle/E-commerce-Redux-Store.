@@ -5,7 +5,10 @@ import { idbPromise } from "../../utils/helpers";
 
 const CartItem = ({ item }) => {
 
-  const [, dispatch] = useStoreContext();
+  const state = useSelector((state) => {
+    return state
+  });
+  const dispatch = useDispatch();
 
   const removeFromCart = item => {
     dispatch({
@@ -13,11 +16,11 @@ const CartItem = ({ item }) => {
       _id: item._id
     });
     idbPromise('cart', 'delete', { ...item });
-
   };
-
+  
   const onChange = (e) => {
     const value = e.target.value;
+  
     if (value === '0') {
       dispatch({
         type: REMOVE_FROM_CART,
@@ -32,6 +35,7 @@ const CartItem = ({ item }) => {
         purchaseQuantity: parseInt(value)
       });
       idbPromise('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
+
 
     }
   }
