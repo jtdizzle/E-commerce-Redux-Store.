@@ -29,15 +29,16 @@ const typeDefs = gql`
     email: String
     orders: [Order]
   }
+  
+  type Auth {
+    token: ID
+    user: User
+  }
 
   type Checkout {
     session: ID
   }
 
-  type Auth {
-    token: ID
-    user: User
-  }
 
   type Query {
     categories: [Category]
